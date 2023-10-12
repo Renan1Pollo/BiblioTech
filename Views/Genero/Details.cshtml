@@ -1,13 +1,13 @@
 ﻿@model BiblioTech.Models.Genero
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalhes do Gênero";
 }
 
-<h1>Details</h1>
+<h1>Detalhes</h1>
 
 <div>
-    <h4>Genero</h4>
+    <h4>Gênero</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -19,6 +19,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.Id"><input type="submit" value="Editar" class="btn btn-primary text-white border-0" style="width: 6rem" /></a> |
+    <a asp-action="Index"><input value="Voltar" class="btn btn-primary bg-danger text-white  border-0 " style="width: 6rem" /></a>
 </div>
