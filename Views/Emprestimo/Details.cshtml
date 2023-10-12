@@ -1,10 +1,10 @@
 ﻿@model BiblioTech.Models.Emprestimo
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalhes do Empréstimo";
 }
 
-<h1>Details</h1>
+<h1>Detalhes</h1>
 
 <div>
     <h4>Emprestimo</h4>
@@ -28,15 +28,9 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.DataRetirada)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Devolvido)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Devolvido)
-        </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.Id"><input type="submit" value="Editar" class="btn btn-primary text-white border-0" style="width: 6rem" /></a> |
+    <a asp-action="Index"><input value="Voltar" class="btn btn-primary bg-danger text-white  border-0 " style="width: 6rem" /></a>
 </div>

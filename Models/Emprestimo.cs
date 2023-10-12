@@ -12,16 +12,16 @@ namespace BiblioTech.Models
         public int Id { get; set; }
 
         [ForeignKey("Usuario")]
-        [Display(Name = "IdUsuario")]
+        [Display(Name = "Código do Usuario")]
         [Required(ErrorMessage = "Campo Obrigatório!")]
         public int IdUsuario { get; set; }
 
         [ForeignKey("Livro")]
-        [Display(Name = "IdLivro")]
+        [Display(Name = "Código do Livro")]
         [Required(ErrorMessage = "Campo Obrigatório!")]
         public int IdLivro { get; set; }
 
-        [Display(Name = "DataRetirada")]
+        [Display(Name = "Data de Retirada")]
         [Required(ErrorMessage = "Campo Obrigatório!")]
         public DateTime DataRetirada { get; set; }
 
