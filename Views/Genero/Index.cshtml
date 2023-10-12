@@ -1,0 +1,38 @@
+﻿@model IEnumerable<BiblioTech.Models.Genero>
+
+@{
+    ViewData["Title"] = "Listagem de Gêneros";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Listagem de Gêneros</h1>
+<br />
+<div class="form-group">
+    <a asp-action="Create"><input type="submit" value="Cadastrar Gênero" class="btn btn-primary bg-success border-0" /></a>
+</div>
+<br />
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Descricao)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descricao)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id"><input type="submit" value="Editar" class="btn btn-primary bg-warning text-white border-0" /></a> |
+                    <a asp-action="Details" asp-route-id="@item.Id"><input type="submit" value="Detalhar" class="btn btn-primary border-0" /></a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id"><input type="submit" value="Excluir" class="btn btn-primary bg-danger border-0" /></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

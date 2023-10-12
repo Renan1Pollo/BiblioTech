@@ -1,0 +1,32 @@
+:root {
+    --white-color: #fff;
+    --white-smoke-color: #F9F9F9;
+    --black-color: #000;
+    --red-color: #CF3C3F;
+    --light-grey-color: #ECECEC;
+    --grey-color: #C4C4C4;
+    --medium-grey-color: #a7a7a7;
+    --deep-grey-color: #343434;
+    --blue-color: #1B77F3;
+    --dark-blue-color: #1B1F27;
+}
+
+footer {
+    height: 10vh;
+    text-align: center;
+    font-size: 1.1rem;
+    background-color: var(--dark-blue-color);
+}
+
+.heart {
+    color: var(--red-color);
+}
+
+.footer p {
+    margin: 0;
+}
+
+.footer a {
+    text-decoration: none;
+    color: var(--white-color)
+}
