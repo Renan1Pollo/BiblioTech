@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using BiblioTech.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using BiblioTech.Models;
 
 namespace BiblioTech.Controllers
 {
@@ -59,6 +54,22 @@ namespace BiblioTech.Controllers
         {
             if (ModelState.IsValid)
             {
+                var livro = await _context.Livros.FindAsync(emprestimo.IdLivro);
+                var user = await _context.Usuarios.FindAsync(emprestimo.IdUsuario);
+
+                if (livro == null)
+                {
+                    ModelState.AddModelError("IdLivro", "O livro selecionado não existe.");
+                    return View(emprestimo);
+                }
+
+                if (user == null)
+                {
+                    ModelState.AddModelError("IdUsuario", "O Usuário selecionado não existe.");
+                    return View(emprestimo);
+                }
+
+                livro.Quantidade--;
                 _context.Add(emprestimo);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
