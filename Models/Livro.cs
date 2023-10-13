@@ -7,11 +7,11 @@ namespace BiblioTech.Models
     public class Livro
     {
         [Key]
-        [Display(Name = "Id")]
+        [Display(Name = "Código")]
         public int Id { get; set; }
 
         [ForeignKey("Genero")]
-        [Display(Name = "IdGenero")]
+        [Display(Name = "Código do Gênero")]
         [Required(ErrorMessage = "Campo Obrigatório!")]
         public int IdGenero { get; set; }
 

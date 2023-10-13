@@ -1,0 +1,80 @@
+﻿:root {
+    --red-color: #d63a25;
+    --white-color: #fff;
+    --black-color: #1e1c2a;
+}
+
+.navigation {
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 40px;
+    box-shadow: 0 0.1rem 0.5rem #ccc;
+    position: fixed;
+    transition: all 0.5s;
+}
+
+.logo {
+    color: var(--black-color);
+    font-size: 1.7rem;
+    text-decoration: none;
+}
+
+.navigation ul {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 5rem;
+}
+
+.navigation ul li a {
+    color: var(--black-color);
+    font-size: 20px;
+    font-weight: 600;
+    transition: all 0.3s;
+    text-decoration: none;
+}
+
+.nav-menu {
+    list-style: none;
+}
+
+.navigation ul li a:hover {
+    color: var(--red-color);
+    cursor: pointer;
+}
+
+.logo:hover {
+    color: var(--red-color);
+    cursor: pointer;
+}
+
+.menu {
+    cursor: pointer;
+    display: none;
+}
+
+.menu .bar {
+    display: block;
+    width: 28px;
+    height: 3px;
+    border-radius: 3px;
+    background-color: var(--black-color);
+    margin: 5px auto;
+    transition: all 0.3s;
+}
+
+.menu .bar:nth-child(1),
+.menu .bar:nth-child(1) {
+    background-color: var(--red-color);
+}
+
+.navigation-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000; 
+}
+

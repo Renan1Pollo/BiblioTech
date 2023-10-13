@@ -3,65 +3,72 @@
 @{
     ViewData["Title"] = "Listagem de Livros";
 }
-
-<h1>Listagem de Livros</h1>
-<br />
-<div class="form-group">
-    <a asp-action="Create"><input type="submit" value="Cadastrar Livro" class="btn btn-primary bg-success border-0" /></a>
-</div>
-<br />
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.IdGenero)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Titulo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Sinopse)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Autor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Volume)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Quantidade)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+<section style="margin-top: 120px;">
+    <h1>Listagem de Livros</h1>
+    <br />
+    <div class="form-group">
+        <a asp-action="Create"><input type="submit" value="Cadastrar Livro" class="btn btn-primary bg-success border-0" /></a>
+    </div>
+    <br />
+    <table class="table">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdGenero)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Titulo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Sinopse)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Autor)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Volume)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Quantidade)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id"><input type="submit" value="Editar" class="btn btn-primary bg-warning text-white border-0" /></a> |
-                    <a asp-action="Details" asp-route-id="@item.Id"><input type="submit" value="Detalhar" class="btn btn-primary border-0" /></a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id"><input type="submit" value="Excluir" class="btn btn-primary bg-danger border-0" /></a>
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Titulo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IdGenero)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Sinopse)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Autor)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Volume)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Quantidade)
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </th>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Titulo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdGenero)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Sinopse)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Autor)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Volume)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantidade)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id"><input type="submit" value="Editar" class="btn btn-primary bg-warning text-white border-0" /></a> |
+                        <a asp-action="Details" asp-route-id="@item.Id"><input type="submit" value="Detalhar" class="btn btn-primary border-0" /></a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id"><input type="submit" value="Excluir" class="btn btn-primary bg-danger border-0" /></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</section>

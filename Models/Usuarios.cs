@@ -7,7 +7,7 @@ namespace BiblioTech.Models
     public class Usuario
     {
         [Key]
-        [Display(Name = "Id")]
+        [Display(Name = "Código")]
         public int Id { get; set; }
 
         [Display(Name = "Nome")]

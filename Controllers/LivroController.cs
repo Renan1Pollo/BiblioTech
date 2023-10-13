@@ -59,6 +59,14 @@ namespace BiblioTech.Controllers
         {
             if (ModelState.IsValid)
             {
+                var generoExists = await _context.Generos.AnyAsync(g => g.Id == livro.IdGenero);
+
+                if (!generoExists)
+                {
+                    ModelState.AddModelError("IdGenero", "O gênero selecionado não existe.");
+                    return View(livro);
+                }
+
                 _context.Add(livro);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -96,6 +104,14 @@ namespace BiblioTech.Controllers
 
             if (ModelState.IsValid)
             {
+                var generoExists = await _context.Generos.AnyAsync(g => g.Id == livro.IdGenero);
+
+                if (!generoExists)
+                {
+                    ModelState.AddModelError("IdGenero", "O gênero selecionado não existe.");
+                    return View(livro);
+                }
+
                 try
                 {
                     _context.Update(livro);
