@@ -7,10 +7,10 @@ namespace BiblioTech.Models
     public class Genero
     {
         [Key]
-        [Display(Name = "Id")]
+        [Display(Name = "Código")]
         public int Id { get; set; }
 
-        [Display(Name = "Descricao")]
+        [Display(Name = "Descricão")]
         [Required(ErrorMessage = "Campo Obrigatório!")]
         public string Descricao { get; set; }
     }

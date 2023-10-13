@@ -16,9 +16,9 @@ namespace BiblioTech.Controllers
         // GET: Emprestimo
         public async Task<IActionResult> Index()
         {
-              return _context.Emprestimos != null ? 
-                          View(await _context.Emprestimos.ToListAsync()) :
-                          Problem("Entity set 'Contexto.Emprestimos'  is null.");
+            return _context.Emprestimos != null ?
+                        View(await _context.Emprestimos.ToListAsync()) :
+                        Problem("Entity set 'Contexto.Emprestimos'  is null.");
         }
 
         // GET: Emprestimo/Details/5
@@ -46,33 +46,42 @@ namespace BiblioTech.Controllers
         }
 
         // POST: Emprestimo/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,IdUsuario,IdLivro,DataRetirada,Devolvido")] Emprestimo emprestimo)
         {
             if (ModelState.IsValid)
             {
-                var livro = await _context.Livros.FindAsync(emprestimo.IdLivro);
-                var user = await _context.Usuarios.FindAsync(emprestimo.IdUsuario);
-
-                if (livro == null)
+                if (ModelState.IsValid)
                 {
-                    ModelState.AddModelError("IdLivro", "O livro selecionado não existe.");
-                    return View(emprestimo);
-                }
+                    var userExists = await _context.Usuarios.AnyAsync(u => u.Id == emprestimo.IdUsuario);
+                    if (!userExists)
+                    {
+                        ModelState.AddModelError("IdUsuario", "O usuário selecionado não existe.");
+                        return View(emprestimo);
+                    }
 
-                if (user == null)
-                {
-                    ModelState.AddModelError("IdUsuario", "O Usuário selecionado não existe.");
-                    return View(emprestimo);
-                }
+                    var livro = await _context.Livros.FindAsync(emprestimo.IdLivro);
+                    if (livro == null)
+                    {
+                        ModelState.AddModelError("IdLivro", "O livro selecionado não existe.");
+                        return View(emprestimo);
+                    }
 
-                livro.Quantidade--;
-                _context.Add(emprestimo);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                    if (livro.Quantidade <= 0)
+                    {
+                        ModelState.AddModelError("IdLivro", "O livro selecionado não está disponível.");
+                        return View(emprestimo);
+                    }
+
+                    _context.Add(emprestimo);
+                    livro.Quantidade--;
+                    await _context.SaveChangesAsync();
+
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(emprestimo);
+
             }
             return View(emprestimo);
         }
@@ -94,8 +103,6 @@ namespace BiblioTech.Controllers
         }
 
         // POST: Emprestimo/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,IdUsuario,IdLivro,DataRetirada,Devolvido")] Emprestimo emprestimo)
@@ -107,6 +114,22 @@ namespace BiblioTech.Controllers
 
             if (ModelState.IsValid)
             {
+                var userExists = await _context.Usuarios.AnyAsync(u => u.Id == emprestimo.IdUsuario);
+
+                if (!userExists)
+                {
+                    ModelState.AddModelError("IdUsuario", "O usuário selecionado não existe.");
+                    return View(emprestimo);
+                }
+
+                var livroExists = await _context.Livros.AnyAsync(l => l.Id == emprestimo.IdLivro);
+
+                if (!livroExists)
+                {
+                    ModelState.AddModelError("IdLivro", "O livro selecionado não existe.");
+                    return View(emprestimo);
+                }
+
                 try
                 {
                     _context.Update(emprestimo);
@@ -155,19 +178,28 @@ namespace BiblioTech.Controllers
             {
                 return Problem("Entity set 'Contexto.Emprestimos'  is null.");
             }
+
             var emprestimo = await _context.Emprestimos.FindAsync(id);
+
             if (emprestimo != null)
             {
                 _context.Emprestimos.Remove(emprestimo);
+
+                var livro = await _context.Livros.FindAsync(emprestimo.IdLivro);
+
+                if (livro != null)
+                {
+                    livro.Quantidade++;
+                }
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool EmprestimoExists(int id)
         {
-          return (_context.Emprestimos?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Emprestimos?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
